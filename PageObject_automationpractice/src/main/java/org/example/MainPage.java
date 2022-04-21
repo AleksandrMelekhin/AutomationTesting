@@ -37,12 +37,5 @@ public class MainPage extends BaseView {
         searchButton.click();
         return new SearchPage(driver);
     }
-
-    @Step("Проверить авторизацию")
-    public void checkLogin(String name) {
-        Assertions.assertAll(
-                () -> assertThat(driver.findElement(By.xpath("//span[contains(., name)]")), isDisplayed())
-        );
-    }
 }
 

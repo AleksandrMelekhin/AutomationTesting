@@ -36,12 +36,23 @@ public class LoginTest {
     @Test
     @Feature("Позитивная авторизация")
     void PositiveLogin() throws InterruptedException {
-        driver.get("http://automationpractice.com/");
-
+        driver.get(STORE_URL);
         new MainPage(driver)
                 .clickSignInButton()
-                .login("123test@test.test", "testtest")
-                .checkLogin();
+                .login("123test@test.test", "testtest");
+        new LoginPage(driver)
+                .checkPositiveLogin();
+    }
+
+    @Test
+    @Feature("Негативная авторизация")
+    void NegativeLogin() throws InterruptedException {
+        driver.get(STORE_URL);
+        new MainPage(driver)
+                .clickSignInButton()
+                .login("test@test.test", "1234567890");
+        new LoginPage(driver)
+                .checkNegativeLogin();
     }
 
     @AfterEach

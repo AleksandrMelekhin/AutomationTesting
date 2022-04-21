@@ -27,11 +27,11 @@ public class TShirtsPage extends BaseView {
     private WebElement addToCartButton;
 
     @Step("Навести курсор мыши на продукт и добавить его в корзину")
-    public SuccessBlock hoverAndClickAddToCartProductByName(String productName) {
+    public SuccessAddToCartBlock hoverAndClickAddToCartProductByName(String productName) {
         actions.moveToElement(productsList.stream().filter(s -> s.getText().contains(productName)).findFirst().get())
                 .build().perform();
         addToCartButton.click();
-        return new SuccessBlock(driver);
+        return new SuccessAddToCartBlock(driver);
     }
 
 }

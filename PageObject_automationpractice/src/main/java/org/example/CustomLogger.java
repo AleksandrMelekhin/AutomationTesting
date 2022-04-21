@@ -16,7 +16,6 @@ public class CustomLogger implements WebDriverListener {
 
     public void beforeFindElement(WebDriver driver, By locator) {
         logger.info("Ищем элемент по локатору " + locator.toString());
-        Allure.step("Ищем элемент по локатору " + locator);
     }
 
     public void beforeQuit(WebDriver driver) {

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import java.util.Random;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
@@ -16,7 +17,6 @@ public class LoginPage extends BaseView {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
     @FindBy(id = "email")
     private WebElement emailField;
     @FindBy(id = "passwd")
@@ -30,6 +30,19 @@ public class LoginPage extends BaseView {
         passwordField.sendKeys(pass);
         submitButton.click();
         return new MyAccountPage(driver);
+    }
+
+    @FindBy(id = "email_create")
+    private WebElement registrationEmailField;
+    @FindBy(id = "SubmitCreate")
+    private WebElement submitCreateButton;
+    @Step("Ввод почты и клик на кнопку Зарегистрироваться")
+    public RegistrationPage registrationNewUser() {
+        String registrationEmail = "test" + new Random().nextInt(10000) + "@test.test";
+        webDriverWait.until(ExpectedConditions.visibilityOf(registrationEmailField));
+        registrationEmailField.sendKeys(registrationEmail);
+        submitCreateButton.click();
+        return new RegistrationPage(driver);
     }
 
     @Step("Проверить позитивную авторизацию")

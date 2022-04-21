@@ -11,8 +11,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
 import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.isDisplayed;
 
-public class SuccessBlock extends BaseView {
-    public SuccessBlock(WebDriver driver) {
+public class SuccessAddToCartBlock extends BaseView {
+    public SuccessAddToCartBlock(WebDriver driver) {
         super(driver);
     }
 
@@ -23,7 +23,6 @@ public class SuccessBlock extends BaseView {
 
     @FindBy(xpath = successIconXpathLocator)
     private WebElement successIcon;
-
     @Step("Проверить корректность суммы заказа")
     public void checkSuccessWithSum(String summ) {
         webDriverWait.until(ExpectedConditions.visibilityOf(successIcon));

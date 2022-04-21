@@ -15,7 +15,7 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginTest {
+public class RegistrationTest {
     WebDriver driver;
     WebDriverWait webDriverWait;
     Actions actions;
@@ -33,30 +33,20 @@ public class LoginTest {
         driver.manage().window().maximize();
     }
 
-    @Epic(value = "Авторизация пользователя на сайте")
-    @Feature(value = "Авторизация")
-    @Story(value = "Позитивная авторизация")
+    @Epic(value = "Регистрация нового пользователя")
+    @Feature(value = "Регистрация")
+    @Story(value = "Позитивная регистрация")
     @Test
-    void PositiveLogin() throws InterruptedException {
+    void PositiveRegistration() throws InterruptedException {
         driver.get(STORE_URL);
         new MainPage(driver)
-                .clickSignInButton()
-                .login("123test@test.test", "testtest");
+                .clickSignInButton();
         new LoginPage(driver)
-                .checkPositiveLogin();
-    }
-
-    @Epic(value = "Авторизация пользователя на сайте")
-    @Feature(value = "Авторизация")
-    @Story(value = "Негативная авторизация")
-    @Test
-    void NegativeLogin() throws InterruptedException {
-        driver.get(STORE_URL);
-        new MainPage(driver)
-                .clickSignInButton()
-                .login("test@test.test", "1234567890");
-        new LoginPage(driver)
-                .checkNegativeLogin();
+                .registrationNewUser();
+        new RegistrationPage(driver)
+                .createNewAccount();
+        new MyAccountPage(driver)
+                .checkPositiveRegistration();
     }
 
     @AfterEach

@@ -1,17 +1,10 @@
 package org.example;
 
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
-import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.isDisplayed;
-
 
 public class RegistrationPage extends BaseView {
     public RegistrationPage(WebDriver driver) {
@@ -32,7 +25,7 @@ public class RegistrationPage extends BaseView {
     @FindBy(id = "id_state")
     private WebElement stateSelectField;
     @FindBy(xpath = "//select[@id='id_state']//option[@value='6']")
-    private WebElement alaskaSelect;
+    private WebElement stateSelect;
     @FindBy(id = "postcode")
     private WebElement postalCode;
     @FindBy(id = "phone_mobile")
@@ -50,8 +43,8 @@ public class RegistrationPage extends BaseView {
         addressField.sendKeys("Lenina street");
         cityField.sendKeys("Test City");
         stateSelectField.click();
-        webDriverWait.until(ExpectedConditions.visibilityOf(alaskaSelect));
-        alaskaSelect.click();
+        webDriverWait.until(ExpectedConditions.visibilityOf(stateSelect));
+        stateSelect.click();
         postalCode.sendKeys("12345");
         mobilePhone.sendKeys("89999999999");
         registerButton.click();

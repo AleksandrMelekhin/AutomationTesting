@@ -15,7 +15,7 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class RegistrationTest {
+public class SearchTest {
     WebDriver driver;
     WebDriverWait webDriverWait;
     Actions actions;
@@ -33,33 +33,16 @@ public class RegistrationTest {
         driver.manage().window().maximize();
     }
 
-    @Epic(value = "Регистрация нового пользователя")
-    @Feature(value = "Регистрация")
-    @Story(value = "Позитивная регистрация")
+    @Epic(value = "Поиск товара")
+    @Feature(value = "Поиск")
+    @Story(value = "Поиск некорректного товара")
     @Test
-    void PositiveRegistration() throws InterruptedException {
+    void SearchIncorrectItem() throws InterruptedException {
         driver.get(STORE_URL);
         new MainPage(driver)
-                .clickSignInButton();
-        new LoginPage(driver)
-                .registrationNewUser();
-        new RegistrationPage(driver)
-                .createNewAccount();
-        new MyAccountPage(driver)
-                .checkPositiveRegistration();
-    }
-
-    @Epic(value = "Регистрация нового пользователя")
-    @Feature(value = "Регистрация")
-    @Story(value = "Попытка регистрации с некорректным email")
-    @Test
-    void RegistrationWithIncorrectEmail() throws InterruptedException {
-        driver.get(STORE_URL);
-        new MainPage(driver)
-                .clickSignInButton();
-        new LoginPage(driver)
-                .registrationIncorrectEmail()
-                .checkRegistrationWithIncorrectEmail();
+                .searchItem("qwerty");
+        new SearchPage(driver)
+                .checkSearchIncorrectItem();
     }
 
     @AfterEach

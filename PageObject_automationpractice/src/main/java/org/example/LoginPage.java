@@ -44,7 +44,13 @@ public class LoginPage extends BaseView {
         submitCreateButton.click();
         return new RegistrationPage(driver);
     }
-
+    @Step("Ввод некорректной почты и клик на кнопку Зарегистрироваться")
+    public LoginPage registrationIncorrectEmail() {
+        webDriverWait.until(ExpectedConditions.visibilityOf(registrationEmailField));
+        registrationEmailField.sendKeys("123");
+        submitCreateButton.click();
+        return new LoginPage(driver);
+    }
     @Step("Проверить позитивную авторизацию")
     public void checkPositiveLogin() {
         Assertions.assertAll(
@@ -58,6 +64,13 @@ public class LoginPage extends BaseView {
                 () -> assertThat(driver.findElement(By.xpath("//div[@class='alert alert-danger']")), isDisplayed()),
                 () -> assertThat(driver.findElement(By.xpath("//div[@class='alert alert-danger']//p")), hasText("There is 1 error")),
                 () -> assertThat(driver.findElement(By.xpath("//div[@class='alert alert-danger']//li")), hasText("Authentication failed."))
+        );
+    }
+    @Step("Проверить регистрацию с некорретным email")
+    public void checkRegistrationWithIncorrectEmail() {
+        Assertions.assertAll(
+                () -> assertThat(driver.findElement(By.xpath("//div[@id='create_account_error']")), isDisplayed()),
+                () -> assertThat(driver.findElement(By.xpath("//div[@id='create_account_error']//li")), hasText("Invalid email address."))
         );
     }
 }

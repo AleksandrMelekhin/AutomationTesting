@@ -17,7 +17,7 @@ public class MainPage extends BaseView {
     public MainPage(WebDriver driver) {
         super(driver);
     }
-
+    // АВТОРИЗАЦИЯ
     @FindBy(xpath = "//a[@class='login']")
     public WebElement signInButton;
     @Step("Клик на кнопку авторизации")
@@ -25,13 +25,13 @@ public class MainPage extends BaseView {
         signInButton.click();
         return new LoginPage(driver);
     }
-
+    // ПОИСК
     @FindBy(id = "search_query_top")
     public WebElement searchField;
     @FindBy(xpath = "//button[@name='submit_search']")
     public WebElement searchButton;
     @Step("Поиск товара")
-    public SearchPage search(String request) {
+    public SearchPage searchItem(String request) {
         webDriverWait.until(ExpectedConditions.visibilityOf(searchField));
         searchField.sendKeys(request);
         searchButton.click();

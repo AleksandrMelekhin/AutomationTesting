@@ -25,4 +25,12 @@ public class SearchPage extends BaseView{
                 () -> assertThat(driver.findElement(By.xpath("//p[@class='alert alert-warning']")), hasText("No results were found for your search \"qwerty\""))
         );
     }
+
+    @Step("Проверить поиск некорректного товара")
+    public void checkSearchCorrectItem() {
+        Assertions.assertAll(
+                () -> assertThat(driver.findElement(By.xpath("//img[@title='Printed Chiffon Dress']")), isDisplayed()),
+                () -> assertThat(driver.findElement(By.xpath("//a[@title='Printed Chiffon Dress']")), isDisplayed())
+        );
+    }
 }

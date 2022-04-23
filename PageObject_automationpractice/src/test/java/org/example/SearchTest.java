@@ -35,7 +35,7 @@ public class SearchTest {
 
     @Epic(value = "Поиск товара")
     @Feature(value = "Поиск")
-    @Story(value = "Поиск некорректного товара")
+    @Story(value = "Поиск не существующего товара")
     @Test
     void SearchIncorrectItem() throws InterruptedException {
         driver.get(STORE_URL);
@@ -43,6 +43,18 @@ public class SearchTest {
                 .searchItem("qwerty");
         new SearchPage(driver)
                 .checkSearchIncorrectItem();
+    }
+
+    @Epic(value = "Поиск товара")
+    @Feature(value = "Поиск")
+    @Story(value = "Поиск существующего товара")
+    @Test
+    void SearchCorrectItem() throws InterruptedException {
+        driver.get(STORE_URL);
+        new MainPage(driver)
+                .searchItem("summer");
+        new SearchPage(driver)
+                .checkSearchCorrectItem();
     }
 
     @AfterEach

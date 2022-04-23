@@ -43,6 +43,7 @@ public class LoginPage extends BaseView {
         registrationEmailField.sendKeys(registrationEmail);
         submitCreateButton.click();
         return new RegistrationPage(driver);
+
     }
     @Step("Ввод некорректной почты и клик на кнопку Зарегистрироваться")
     public LoginPage registrationIncorrectEmail() {
@@ -66,8 +67,11 @@ public class LoginPage extends BaseView {
                 () -> assertThat(driver.findElement(By.xpath("//div[@class='alert alert-danger']//li")), hasText("Authentication failed."))
         );
     }
-    @Step("Проверить регистрацию с некорретным email")
+    @FindBy(id = "create_account_error")
+    private WebElement invalidEmailError;
+    @Step("Проверить регистрацию с некорректным email")
     public void checkRegistrationWithIncorrectEmail() {
+        webDriverWait.until(ExpectedConditions.visibilityOf(invalidEmailError));
         Assertions.assertAll(
                 () -> assertThat(driver.findElement(By.xpath("//div[@id='create_account_error']")), isDisplayed()),
                 () -> assertThat(driver.findElement(By.xpath("//div[@id='create_account_error']//li")), hasText("Invalid email address."))

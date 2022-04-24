@@ -1,22 +1,16 @@
 package org.example;
 
 import io.qameta.allure.Step;
-import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.hasText;
-import static ru.yandex.qatools.htmlelements.matchers.WebElementMatchers.isDisplayed;
-
-
 public class MainPage extends BaseView {
     public MainPage(WebDriver driver) {
         super(driver);
     }
+
     // АВТОРИЗАЦИЯ
     @FindBy(xpath = "//a[@class='login']")
     public WebElement signInButton;
@@ -25,6 +19,7 @@ public class MainPage extends BaseView {
         signInButton.click();
         return new LoginPage(driver);
     }
+
     // ПОИСК
     @FindBy(id = "search_query_top")
     public WebElement searchField;
@@ -36,6 +31,15 @@ public class MainPage extends BaseView {
         searchField.sendKeys(request);
         searchButton.click();
         return new SearchPage(driver);
+    }
+
+    // КОРЗИНА
+    @FindBy(xpath = "//a[@title='View my shopping cart']")
+    private WebElement cartButton;
+    @Step("Переход в корзину")
+    public CartPage clickCartPage() {
+        cartButton.click();
+        return new CartPage(driver);
     }
 }
 
